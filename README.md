@@ -1,9 +1,47 @@
 Light-cycle
 ============
 
-A consistent hash ringcycle for sharding your dataz, with 100% more blue glow and 50% less Wagner.
+A consistent hashringcycle for sharding your dataz, with 100% more blue glow and 50% less Wagner.
 
 [![Build Status](https://secure.travis-ci.org/ceejbot/light-cycle.png)](http://travis-ci.org/ceejbot/light-cycle) [![Dependencies](https://david-dm.org/ceejbot/light-cycle.png)](https://david-dm.org/ceejbot/light-cycle) [![NPM version](https://badge.fury.io/js/light-cycle.png)](http://badge.fury.io/js/light-cycle)
+
+## Usage
+
+To install:
+
+`npm install light-cycle`
+
+Sample usage:
+
+```javascript
+var Lightcycle = require('light-cycle');
+
+var cycle = new Lightcycle(
+{
+    seed: 0xdeadbeef,
+    size: 50
+});
+
+// Create entries in the hash ring for each of our redis caches, using redis:host:port as
+// their unique ids in the
+for (var i = 0; i < myRedisInstances.length; i++)
+{
+    var redisShard = myRedisInstances[i];
+    cycle.add(redisShard, ['redis', redisShard.host, redisShard.port].join(':'));
+}
+
+// Now we have something to cache in one of our shards.
+var dataToStore =
+{
+    id: '3421',
+    data: 'This is very important data that must be cached in our redises.',
+    timestamp: Date.now()
+}
+
+// Where shall we store this?
+var whichRedis = cycle.location(dataToStore.id);
+whichRedis.hmset(dataToStore.id, dataToStore, callback);
+```
 
 ## API
 

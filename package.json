@@ -1,6 +1,6 @@
 {
 	"name":        "light-cycle",
-	"version":     "0.0.1",
+	"version":     "0.0.2",
 	"description": "a consistent hash ring for your blue-glowing shards",
 	"author":      "C J Silverio <ceejceej@gmail.com>",
 	"license":     "MIT",
@@ -24,8 +24,8 @@
 	],
 	"dependencies":
 	{
-		"skiplist": "~0.0.1",
-		"xxhash": "~0.0.2"
+		"skiplist": "*",
+		"xxhash": "*"
 	},
 	"devDependencies":
 	{
