@@ -1,0 +1,36 @@
+{
+	"name":        "light-cycle",
+	"version":     "0.0.1",
+	"description": "a consistent hash ring for your blue-glowing shards",
+	"author":      "C J Silverio <ceejceej@gmail.com>",
+	"license":     "MIT",
+	"main":        "index.js",
+	"scripts":
+	{
+		"test":    "./node_modules/.bin/mocha -R spec test/*.js && ./node_modules/.bin/mocha -R travis-cov test/*.js",
+		"blanket":
+		{
+		    "pattern": "//^((?!\/doc|test|node_modules\/).)*$/ig",
+		    "onlyCwd": true
+		},
+		"travis-cov": { "threshold": 90 }
+	},
+	"keywords":
+	[
+		"hashing",
+		"hash ring",
+		"consistent hash ring",
+		"sharding"
+	],
+	"dependencies":
+	{
+		"xxhash": "*"
+	},
+	"devDependencies":
+	{
+		"blanket":    "*",
+		"chai":       "*",
+		"mocha":      "*",
+		"travis-cov": "*"
+	}
+}
