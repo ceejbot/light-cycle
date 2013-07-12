@@ -124,11 +124,6 @@ describe('light-cycle', function()
             var allEntries = cycle.resources.find();
             assert.equal(allEntries.length, 3);
         });
-
-        it('handles hash collisions');
-
-
-
     });
 
     describe('remove', function()
@@ -168,7 +163,6 @@ describe('light-cycle', function()
 
             cycle.remove(r3);
         });
-
     });
 
     describe('locate', function()
@@ -222,8 +216,4 @@ describe('light-cycle', function()
             assert(newLoc.name() !== originalLoc.name());
         });
     });
-
-
-
-
 });
