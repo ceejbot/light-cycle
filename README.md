@@ -3,6 +3,9 @@ Light-cycle
 
 A consistent hash ringcycle for sharding your dataz, with 100% more blue glow and 50% less Wagner.
 
+[![Build Status](https://secure.travis-ci.org/ceejbot/light-cycle.png)](http://travis-ci.org/ceejbot/light-cycle) [![Dependencies](https://david-dm.org/ceejbot/light-cycle.png)](https://david-dm.org/ceejbot/light-cycle) [![NPM version](https://badge.fury.io/js/light-cycle.png)](http://badge.fury.io/js/light-cycle)
+
+
 ## API
 
 Reources to be added must expose a `name()` function. What you return from that is up to you, but it should be unique per resource or sadness might result. Names must be strings.
