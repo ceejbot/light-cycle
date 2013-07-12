@@ -3,26 +3,38 @@ Light-cycle
 
 A consistent hash ringcycle for sharding your dataz, with 100% more blue glow and 50% less Wagner.
 
-
 ## API
 
-## Notes
+Reources to be added must expose a `name()` function. What you return from that is up to you, but it should be unique per resource or sadness might result. Names must be strings.
 
+### new Lightcycle(settings)
 
-- storage agnostic
-- storage units must by an object that exposes a `name()` function
-- name is used to calculate the hash so it has to be unique
-- performs best if you know how many storage units you expect
-- `locate()` takes the id of your data & returns a storage unit synchronously (probably)
+Construct a cycle.
 
+Settings may include the following fields:
 
+`seed`: seed for the hash function; must be a positive integer
+`size`: expected number of resources you'll be storing; defaults to 128
+`replicas`: number of replicas to store in the cycle for each resource; defaults to `size`
+
+### cycle.add(resource)
+
+Add a resource to the cycle. This will create *replicas* entries in the underlying data structure.
+
+### cycle.remove(resource)
+
+Remove a resource from the cycle.
+
+### cycle.locate(id)
+
+Given the id of some data you wish to locate, return the resource where it should reside. `id` may be a string or a buffer.
 
 ## See Also
 
 [Wikipedia](http://en.wikipedia.org/wiki/Consistent_hashing) is informative.
 
-[A good introduction](http://www.martinbroadhurst.com/Consistent-Hash-Ring.html)
+[This page is another good introduction](http://www.martinbroadhurst.com/Consistent-Hash-Ring.html) to consistent hash rings.
 
-http://www.tom-e-white.com/2007/11/consistent-hashing.html
+[So is this one.](http://www.tom-e-white.com/2007/11/consistent-hashing.html)
 
-[The original paper](http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.147.1879)
+And there's always [the original paper](http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.147.1879).
