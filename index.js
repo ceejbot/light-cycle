@@ -43,11 +43,11 @@ Lightcycle.prototype.remove = function(id)
 Lightcycle.prototype.locate = function(id)
 {
     var key = this.hashit(id);
-    var results = this.resources.find(key);
+    var results = this.resources.findWithCount(key, 1);
 
     if (results.length === 0)
     {
-        results = this.resources.find();
+        results = this.resources.findWithCount(null, 1);
     }
 
     if (results.length)
