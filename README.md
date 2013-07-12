@@ -1,7 +1,7 @@
 Light-cycle
 ============
 
-A consistent hash ringcycle for sharding your dataz, with 100% more blue glow.
+A consistent hash ringcycle for sharding your dataz, with 100% more blue glow and 50% less Wagner.
 
 
 ## API
