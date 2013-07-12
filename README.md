@@ -23,7 +23,7 @@ var cycle = new Lightcycle(
 });
 
 // Create entries in the hash ring for each of our redis caches, using redis:host:port as
-// their unique ids in the
+// their unique ids in the ring.
 for (var i = 0; i < myRedisInstances.length; i++)
 {
     var redisShard = myRedisInstances[i];
