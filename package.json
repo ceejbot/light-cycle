@@ -25,7 +25,7 @@
 	"dependencies":
 	{
 		"skiplist": "~0.0.1",
-		"xxhash": "*"
+		"xxhash": "~0.0.2"
 	},
 	"devDependencies":
 	{
@@ -33,5 +33,10 @@
 		"chai":       "*",
 		"mocha":      "*",
 		"travis-cov": "*"
-	}
+	},
+	"contributors":
+	[
+		"C J Silverio <ceejceej@gmail.com>",
+		"Kit Cambridge <kitcambridge@me.com>"
+	]
 }

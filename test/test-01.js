@@ -27,9 +27,9 @@ function makeFruitCycle()
     var r2 = new MockResource('papaya');
     var r3 = new MockResource('litchi');
 
-    cycle.add(r1);
-    cycle.add(r2);
-    cycle.add(r3);
+    cycle.add(r1, r1.name());
+    cycle.add(r2, r2.name());
+    cycle.add(r3, r3.name());
 
     return cycle;
 }
@@ -87,7 +87,7 @@ describe('light-cycle', function()
 
     describe('add', function()
     {
-        it('demands that resources have a name function', function()
+        it('demands both resource and id parameters', function()
         {
             var cycle = new Lightcycle({ size: 10, replicas: 3 });
             var resource = { name: 'nameless' };
@@ -105,7 +105,7 @@ describe('light-cycle', function()
             var cycle = new Lightcycle({ size: 10, replicas: 3 });
             var resource = new MockResource('kiwi');
 
-            cycle.add(resource);
+            cycle.add(resource, resource.name());
 
             var key1 = cycle.hashit(resource.name() + '0');
             var item = cycle.resources.match(key1);
@@ -119,7 +119,7 @@ describe('light-cycle', function()
             var cycle = new Lightcycle({ size: 10, replicas: 3 });
             var resource = new MockResource('kiwi');
 
-            cycle.add(resource);
+            cycle.add(resource, resource.name());
 
             var allEntries = cycle.resources.find();
             assert.equal(allEntries.length, 3);
@@ -134,13 +134,13 @@ describe('light-cycle', function()
             var r1 = new MockResource('kiwi');
             var r2 = new MockResource('papaya');
 
-            cycle.add(r1);
-            cycle.add(r2);
+            cycle.add(r1, r1.name());
+            cycle.add(r2, r2.name());
 
             var allItems = cycle.resources.find();
             assert.equal(allItems.length, 6);
 
-            cycle.remove(r1);
+            cycle.remove(r1.name());
 
             var afterItems = cycle.resources.find();
             assert.equal(afterItems.length, 3);
@@ -158,10 +158,10 @@ describe('light-cycle', function()
             var r2 = new MockResource('papaya');
             var r3 = new MockResource('litchi');
 
-            cycle.add(r1);
-            cycle.add(r2);
+            cycle.add(r1, r1.name());
+            cycle.add(r2, r2.name());
 
-            cycle.remove(r3);
+            cycle.remove(r3.name());
         });
     });
 
@@ -209,7 +209,7 @@ describe('light-cycle', function()
             var allResources = cycle.resources.find();
 
             var originalLoc = cycle.locate('pomegranate');
-            cycle.remove(originalLoc);
+            cycle.remove(originalLoc.name());
 
             var newLoc = cycle.locate('pomegranate');
             assert.ok(newLoc);

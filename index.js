@@ -18,25 +18,25 @@ var Lightcycle = module.exports = function Lightcycle(settings)
     this.resources = new Skiplist(this.size * this.replicas);
 };
 
-Lightcycle.prototype.add = function(resource)
+Lightcycle.prototype.add = function(resource, id)
 {
-    assert(resource && (typeof resource.name == 'function'), 'resources must expose a name() function');
-    var name = resource.name();
+    assert(resource);
+    assert(id && typeof id === 'string');
 
     for (var i = 0; i < this.replicas; i++)
     {
-        var key = this.hashit(name + String(i));
+        var key = this.hashit(id + String(i));
         this.resources.insert(key, resource);
     }
 };
 
-Lightcycle.prototype.remove = function(resource)
+Lightcycle.prototype.remove = function(id)
 {
-    var name = resource.name();
+    assert(id && typeof id === 'string');
 
     for (var i = 0; i < this.replicas; i++)
     {
-        this.resources.remove(this.hashit(name + String(i)));
+        this.resources.remove(this.hashit(id + String(i)));
     }
 };
 

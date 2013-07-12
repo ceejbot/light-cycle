@@ -5,10 +5,9 @@ A consistent hash ringcycle for sharding your dataz, with 100% more blue glow an
 
 [![Build Status](https://secure.travis-ci.org/ceejbot/light-cycle.png)](http://travis-ci.org/ceejbot/light-cycle) [![Dependencies](https://david-dm.org/ceejbot/light-cycle.png)](https://david-dm.org/ceejbot/light-cycle) [![NPM version](https://badge.fury.io/js/light-cycle.png)](http://badge.fury.io/js/light-cycle)
 
-
 ## API
 
-Reources to be added must expose a `name()` function. What you return from that is up to you, but it should be unique per resource or sadness might result. Names must be strings.
+Reources are any object or identifier you wish to store. You can store an open database connection, a resource identifier, or something else. This module does not attempt to inspect or use the resource. It just implements a sharding scheme based on the resource's id.
 
 ### new Lightcycle(settings)
 
@@ -16,17 +15,19 @@ Construct a cycle.
 
 Settings may include the following fields:
 
-`seed`: seed for the hash function; must be a positive integer
+`seed`: seed for the hash function; must be a positive integer; defaults to `0xcafed00d`
 `size`: expected number of resources you'll be storing; defaults to 128
 `replicas`: number of replicas to store in the cycle for each resource; defaults to `size`
 
-### cycle.add(resource)
+If you want your light-cycle to behave identically to other invocations, pass the same hash seed.
 
-Add a resource to the cycle. This will create *replicas* entries in the underlying data structure.
+### cycle.add(resource, id)
 
-### cycle.remove(resource)
+Add a resource to the cycle. This will create *replicas* entries in the underlying data structure. The `id` parameter must be a string.
 
-Remove a resource from the cycle.
+### cycle.remove(id)
+
+Remove the resource with the given id from the cycle. This removes all replica entries.
 
 ### cycle.locate(id)
 
