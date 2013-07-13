@@ -53,8 +53,8 @@ Construct a cycle.
 
 Settings may include the following fields:
 
-`seed`: seed for the hash function; must be a positive integer; defaults to `0xcafed00d`
-`size`: expected number of resources you'll be storing; defaults to 128
+`seed`: seed for the hash function; must be a positive integer; defaults to `0xcafed00d`  
+`size`: expected number of resources you'll be storing; defaults to 128  
 `replicas`: number of replicas to store in the cycle for each resource; defaults to `size`
 
 If you want your light-cycle to behave identically to other invocations, pass the same hash seed.
