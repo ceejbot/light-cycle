@@ -47,7 +47,7 @@ describe('light-cycle', function()
             shouldThrow.should.throw(Error);
         });
 
-        it('respects the hash seed setting', function()
+        it('provides a default hash seed', function()
         {
             var cycle = new Lightcycle({ });
             assert.equal(cycle.seed, 0xcafed00d);
