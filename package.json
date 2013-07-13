@@ -9,6 +9,7 @@
 	"scripts":
 	{
 		"test":    "./node_modules/.bin/mocha -R spec test/*.js && ./node_modules/.bin/mocha --require blanket -R travis-cov test/*.js",
+		"coveralls": "NODE_ENV=test YOURPACKAGE_COVERAGE=1 ./node_modules/.bin/mocha --require blanket --reporter mocha-lcov-reporter test/*.js | ./node_modules/coveralls/bin/coveralls.js",
 		"blanket":
 		{
 		    "pattern": "//^((?!\/test|node_modules\/).)*$/ig",
@@ -30,10 +31,12 @@
 	},
 	"devDependencies":
 	{
-		"blanket":    "*",
-		"chai":       "*",
-		"mocha":      "*",
-		"travis-cov": "*"
+		"blanket":             "*",
+		"chai":                "*",
+		"mocha":               "*",
+		"travis-cov":          "*",
+		"mocha-lcov-reporter": "*",
+		"coveralls":           "*"
 	},
 	"contributors":
 	[

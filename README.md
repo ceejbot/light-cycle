@@ -3,7 +3,7 @@ Light-cycle
 
 A consistent hashringcycle for sharding your dataz, with 100% more blue glow and 50% less Wagner.
 
-[![Build Status](https://secure.travis-ci.org/ceejbot/light-cycle.png)](http://travis-ci.org/ceejbot/light-cycle) [![Dependencies](https://david-dm.org/ceejbot/light-cycle.png)](https://david-dm.org/ceejbot/light-cycle) [![NPM version](https://badge.fury.io/js/light-cycle.png)](http://badge.fury.io/js/light-cycle)
+[![Build Status](https://secure.travis-ci.org/ceejbot/light-cycle.png)](http://travis-ci.org/ceejbot/light-cycle) [![Dependencies](https://david-dm.org/ceejbot/light-cycle.png)](https://david-dm.org/ceejbot/light-cycle) [![NPM version](https://badge.fury.io/js/light-cycle.png)](http://badge.fury.io/js/light-cycle) [![Coverage Status](https://coveralls.io/repos/ceejbot/light-cycle/badge.png)](https://coveralls.io/r/ceejbot/light-cycle)
 
 ## Usage
 
