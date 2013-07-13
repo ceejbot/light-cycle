@@ -5,6 +5,7 @@
 	"author":      "C J Silverio <ceejceej@gmail.com>",
 	"license":     "MIT",
 	"main":        "index.js",
+	"repository":  "git://github.com/ceejbot/light-cycle.git",
 	"scripts":
 	{
 		"test":    "./node_modules/.bin/mocha -R spec test/*.js && ./node_modules/.bin/mocha --require blanket -R travis-cov test/*.js",
