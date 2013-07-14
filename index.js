@@ -16,28 +16,52 @@ var Lightcycle = module.exports = function Lightcycle(settings)
 
     this.replicas = settings.replicas || (settings.size > 0 ? settings.size : 128);
     this.resources = new Skiplist(this.size * this.replicas);
+    this.cache = {};
+    this.entries = 0;
 };
+
+Lightcycle.SIZE_PAD = 32;
+Lightcycle.REPLICAS_PAD = 16;
 
 Lightcycle.prototype.add = function(resource, id)
 {
     assert(resource);
     assert(id && typeof id === 'string');
+    if (!this.cache[id])
+        this.cache[id] = [];
+    var key;
 
     for (var i = 0; i < this.replicas; i++)
     {
-        var key = this.hashit(id + String(i));
+        if (this.cache[id][i])
+            key = this.cache[id][i];
+        else
+        {
+            key = this.hashit(id + String(i));
+            this.cache[id][i] = key;
+        }
         this.resources.insert(key, resource);
     }
+
+    this.entries++;
+    if (this.entries >= this.size)
+        this.rebalance();
 };
 
 Lightcycle.prototype.remove = function(id)
 {
     assert(id && typeof id === 'string');
+    if (!Array.isArray(this.cache[id]))
+        return;
+    var key;
 
     for (var i = 0; i < this.replicas; i++)
     {
-        this.resources.remove(this.hashit(id + String(i)));
+        key = this.cache[id][i];
+        this.resources.remove(key);
     }
+
+    this.entries--;
 };
 
 Lightcycle.prototype.locate = function(id)
@@ -64,8 +88,19 @@ Lightcycle.prototype.hashit = function(input)
     var hash = new Xxhash(this.seed);
     hash.update(input);
     var result = hash.digest().toString(16);
-    while (result.length < 8)
-        result = '0' + result;
+    while (result.length < 8) result = '0' + result;
 
     return result;
 };
+
+Lightcycle.prototype.rebalance = function()
+{
+    var resources = this.resources.find();
+    this.size = resources.length + Lightcycle.SIZE_PAD;
+    this.replicas = resources.length + Lightcycle.REPLICAS_PAD;
+    this.resources = new Skiplist(this.size * this.replicas);
+
+    for (var i = 0; i < resources.length; i++)
+        this.add(resources[i][1], resources[i][0]);
+};
+

@@ -85,7 +85,7 @@ describe('light-cycle', function()
         });
     });
 
-    describe('add', function()
+    describe('add()', function()
     {
         it('demands both resource and id parameters', function()
         {
@@ -124,9 +124,20 @@ describe('light-cycle', function()
             var allEntries = cycle.resources.find();
             assert.equal(allEntries.length, 3);
         });
+
+        it('adding twice has no ill effect', function()
+        {
+            var cycle = new Lightcycle({ size: 10, replicas: 3 });
+            var resource = new MockResource('kiwi');
+
+            cycle.add(resource, resource.name());
+            cycle.add(resource, resource.name());
+            var allEntries = cycle.resources.find();
+            assert.equal(allEntries.length, 3);
+        });
     });
 
-    describe('remove', function()
+    describe('remove()', function()
     {
         it('removes all replicas from the cycle', function()
         {
@@ -165,7 +176,7 @@ describe('light-cycle', function()
         });
     });
 
-    describe('locate', function()
+    describe('locate()', function()
     {
         it('returns a single resource for a given id', function()
         {
@@ -214,6 +225,24 @@ describe('light-cycle', function()
             var newLoc = cycle.locate('pomegranate');
             assert.ok(newLoc);
             assert(newLoc.name() !== originalLoc.name());
+        });
+    });
+
+    describe('rebalance', function()
+    {
+        it('is triggered when adding makes the number of entries equal to the size', function()
+        {
+            var cycle = new Lightcycle({ size: 2, replicas: 2 });
+            var r1 = new MockResource('durian');
+            var r2 = new MockResource('gooseberry');
+
+            cycle.add(r1, r1.name());
+            cycle.add(r1, r1.name());
+
+            assert.equal(cycle.size, 2 + Lightcycle.SIZE_PAD,
+                    'expected size to be ' + Lightcycle.SIZE_PAD + ' + the number of entries');
+            assert.equal(cycle.replicas, 2 + Lightcycle.REPLICAS_PAD,
+                    'expected replica count to be ' + Lightcycle.REPLICAS_PAD + ' + the number of entries');
         });
     });
 });
