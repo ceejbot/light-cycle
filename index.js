@@ -63,5 +63,9 @@ Lightcycle.prototype.hashit = function(input)
 
     var hash = new Xxhash(this.seed);
     hash.update(input);
-    return  hash.digest().toString(16);
+    var result = hash.digest().toString(16);
+    while (result.length < 8)
+        result = '0' + result;
+
+    return result;
 };
