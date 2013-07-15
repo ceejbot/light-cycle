@@ -3,8 +3,8 @@
 var
     assert   = require('assert'),
     Skiplist = require('skiplist'),
-    Xxhash   = require('xxhash');
-
+    Xxhash   = require('xxhash')
+    ;
 
 var Lightcycle = module.exports = function Lightcycle(settings)
 {
@@ -14,14 +14,15 @@ var Lightcycle = module.exports = function Lightcycle(settings)
     this.size = Math.round(settings.size) || 128;
     assert(this.size > 0, 'you must pass in a positive integer for size');
 
-    this.replicas = settings.replicas || (settings.size > 0 ? settings.size : 128);
-    this.resources = new Skiplist(this.size * this.replicas);
+    this.replicas = settings.replicas || this.size;
+    this.resources = new Skiplist(this.size * this.replicas + 16); // a little padding
     this.cache = {};
-    this.entries = 0;
+    this.entries = {};
 };
 
-Lightcycle.SIZE_PAD = 32;
-Lightcycle.REPLICAS_PAD = 16;
+// Constants used when rebalancing to leave space.
+Lightcycle.SIZE_PAD     = 16;
+Lightcycle.REPLICAS_PAD = 8;
 
 Lightcycle.prototype.add = function(resource, id)
 {
@@ -43,8 +44,8 @@ Lightcycle.prototype.add = function(resource, id)
         this.resources.insert(key, resource);
     }
 
-    this.entries++;
-    if (this.entries >= this.size)
+    this.entries[id] = resource;
+    if (Object.keys(this.entries).length > this.size)
         this.rebalance();
 };
 
@@ -61,7 +62,7 @@ Lightcycle.prototype.remove = function(id)
         this.resources.remove(key);
     }
 
-    this.entries--;
+    delete this.entries[id];
 };
 
 Lightcycle.prototype.locate = function(id)
@@ -93,14 +94,21 @@ Lightcycle.prototype.hashit = function(input)
     return result;
 };
 
+Lightcycle.prototype.all = function()
+{
+    return this.entries;
+}
+
 Lightcycle.prototype.rebalance = function()
 {
-    var resources = this.resources.find();
-    this.size = resources.length + Lightcycle.SIZE_PAD;
-    this.replicas = resources.length + Lightcycle.REPLICAS_PAD;
+    var ids = Object.keys(this.entries);
+
+    this.size = ids.length + Lightcycle.SIZE_PAD;
+    this.replicas =  ids.length + Lightcycle.REPLICAS_PAD;
     this.resources = new Skiplist(this.size * this.replicas);
 
-    for (var i = 0; i < resources.length; i++)
-        this.add(resources[i][1], resources[i][0]);
+
+    for (var i = 0; i < ids.length; i++)
+        this.add(this.entries[ids[i]], ids[i]);
 };
 

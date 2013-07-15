@@ -1,6 +1,6 @@
 {
 	"name":        "light-cycle",
-	"version":     "0.0.5",
+	"version":     "0.0.6",
 	"description": "a consistent hash ring for your blue-glowing shards",
 	"author":      "C J Silverio <ceejceej@gmail.com>",
 	"license":     "MIT",

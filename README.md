@@ -3,9 +3,11 @@ Light-cycle
 
 A consistent hashringcycle for sharding your dataz, with 100% more blue glow and 50% less Wagner.
 
-[![Build Status](https://secure.travis-ci.org/ceejbot/light-cycle.png)](http://travis-ci.org/ceejbot/light-cycle) [![Dependencies](https://david-dm.org/ceejbot/light-cycle.png)](https://david-dm.org/ceejbot/light-cycle) [![NPM version](https://badge.fury.io/js/light-cycle.png)](http://badge.fury.io/js/light-cycle) [![Coverage Status](https://coveralls.io/repos/ceejbot/light-cycle/badge.png)](https://coveralls.io/r/ceejbot/light-cycle)
+[![Build Status](https://secure.travis-ci.org/ceejbot/light-cycle.png)](http://travis-ci.org/ceejbot/light-cycle)
+[![Dependencies](https://david-dm.org/ceejbot/light-cycle.png)](https://david-dm.org/ceejbot/light-cycle)  
+[![Coverage Status](https://coveralls.io/repos/ceejbot/light-cycle/badge.png)](https://coveralls.io/r/ceejbot/light-cycle)
 
-[![NPM](http://nodei.co/npm/light-cycle.png)](http://nodei.co/npm/light-cycle/)
+[![NPM](https://nodei.co/npm/light-cycle.png)](https://nodei.co/npm/light-cycle/)
 
 ## Usage
 
@@ -72,6 +74,14 @@ Remove the resource with the given id from the cycle. This removes all replica e
 ### cycle.locate(id)
 
 Given the id of some data you wish to locate, return the resource where it should reside. `id` may be a string or a buffer.
+
+### cycle.rebalance()
+
+Resize the cycle to accomodate the current number of entries plus some padding.
+
+This is called automatically if the number of entries added exceeds the size option passed in at configuration. Rebalance is not automatically called when resources are removed.
+
+Hash keys are cached, so rebalancing shouldn't be too slow, but to avoid thrash rebalancing pads out the size and the replica count by `Lightcycle.SIZE_PAD` and `Lightcycle.REPLICAS_PAD` respectively. For best results, choose a size setting at start that can accomodate the number of resources you intend to use.
 
 ## See Also
 
