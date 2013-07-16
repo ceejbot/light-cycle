@@ -43,7 +43,7 @@ var dataToStore =
 }
 
 // Where shall we store this?
-var whichRedis = cycle.location(dataToStore.id);
+var whichRedis = cycle.locate(dataToStore.id);
 whichRedis.hmset(dataToStore.id, dataToStore, callback);
 ```
 
