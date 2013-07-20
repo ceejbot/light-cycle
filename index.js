@@ -71,9 +71,7 @@ Lightcycle.prototype.locate = function(id)
     var results = this.resources.findWithCount(key, 1);
 
     if (results.length === 0)
-    {
         results = this.resources.findWithCount(null, 1);
-    }
 
     if (results.length)
         return results[0][1]
@@ -107,8 +105,6 @@ Lightcycle.prototype.rebalance = function()
     this.replicas =  ids.length + Lightcycle.REPLICAS_PAD;
     this.resources = new Skiplist(this.size * this.replicas);
 
-
     for (var i = 0; i < ids.length; i++)
         this.add(this.entries[ids[i]], ids[i]);
 };
-
