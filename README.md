@@ -49,7 +49,7 @@ whichRedis.hmset(dataToStore.id, dataToStore, callback);
 
 ## API
 
-Reources are any object or identifier you wish to store. You can store an open database connection, a resource identifier, or something else. This module does not attempt to inspect or use the resource. It just implements a sharding scheme based on the resource's id.
+Resources are any object or identifier you wish to store. You can store an open database connection, a resource identifier, or something else. This module does not attempt to inspect or use the resource. It just implements a sharding scheme based on the resource's id.
 
 ### new Lightcycle(settings)
 
