@@ -32,7 +32,7 @@
 	],
 	"dependencies":
 	{
-		"skiplist": "^0.0",
+		"skiplist": "^1.0.0",
 		"xxhash": "ceejbot/node-xxhash.git"
 	},
 	"devDependencies":
