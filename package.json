@@ -30,7 +30,7 @@
   ],
   "dependencies": {
     "skiplist": "^1.0.0",
-    "xxhash": "ceejbot/node-xxhash.git"
+    "xxhash-nan": "~0.9.0"
   },
   "devDependencies": {
     "blanket": "^1.1",

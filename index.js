@@ -3,7 +3,7 @@
 var
     assert   = require('assert'),
     Skiplist = require('skiplist'),
-    Xxhash   = require('xxhash')
+    Xxhash   = require('xxhash-nan')
     ;
 
 var Lightcycle = module.exports = function Lightcycle(settings)
@@ -19,6 +19,13 @@ var Lightcycle = module.exports = function Lightcycle(settings)
     this.cache = {};
     this.entries = {};
 };
+
+Lightcycle.prototype.seed      = 0xcafed00d;
+Lightcycle.prototype.size      = 128;
+Lightcycle.prototype.replicas  = 128;
+Lightcycle.prototype.resources = null;
+Lightcycle.prototype.cache     = null;
+Lightcycle.prototype.entries   = null;
 
 // Constants used when rebalancing to leave space.
 Lightcycle.SIZE_PAD     = 16;
