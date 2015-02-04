@@ -20,14 +20,14 @@
     "Kit Cambridge <kitcambridge@me.com>"
   ],
   "dependencies": {
-    "skiplist": "^1.0.0",
-    "xxhash-nan": "~0.9.0"
+    "skiplist": "~1.0.0",
+    "xxhash": "~0.2.1"
   },
   "devDependencies": {
     "blanket": "^1.1",
-    "chai": "^1.9",
-    "coveralls": "^2.7",
-    "mocha": "^1.17",
+    "chai": "~1.10.0",
+    "coveralls": "~2.11.2",
+    "mocha": "~2.1.0",
     "mocha-lcov-reporter": "^0.0",
     "travis-cov": "^0.2"
   },

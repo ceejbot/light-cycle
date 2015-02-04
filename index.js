@@ -3,7 +3,7 @@
 var
     assert   = require('assert'),
     Skiplist = require('skiplist'),
-    Xxhash   = require('xxhash-nan')
+    Xxhash   = require('xxhash')
     ;
 
 var Lightcycle = module.exports = function Lightcycle(settings)
