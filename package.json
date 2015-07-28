@@ -26,14 +26,16 @@
   "dependencies": {
     "mocoverage": "~1.0.0",
     "skiplist": "~1.0.0",
-    "xxhash": "~0.2.1"
+    "xxhashjs": "~0.1.1"
   },
   "devDependencies": {
-    "blanket": "^1.1",
-    "chai": "~2.1.2",
-    "coveralls": "~2.11.2",
-    "mocha": "~2.1.0",
+    "blanket": "~1.1.7",
+    "coveralls": "~2.11.3",
+    "jscs": "~2.0.0",
+    "jshint": "~2.8.0",
+    "mocha": "~2.2.5",
     "mocha-lcov-reporter": "0.0.2",
+    "must": "~0.12.0",
     "travis-cov": "^0.2"
   },
   "homepage": "https://github.com/ceejbot/light-cycle",
@@ -48,10 +50,10 @@
   "main": "index.js",
   "repository": "git://github.com/ceejbot/light-cycle.git",
   "scripts": {
-    "travis": "npm run test-suite && npm run test-cov && npm run coveralls",
+    "lint": "jshint *.js test/*.js && jscs *.js test/*.js",
+    "travis": "npm run lint && npm run test && npm run test-cov",
     "test": "mocha --check-leaks --ui exports --require blanket -R mocoverage test/test*.js",
     "test-cov": "mocha --require blanket -R travis-cov test/*.js",
-    "coverage": "mocha --require blanket -R html-cov test/*.js > test/coverage.html",
-    "coveralls": "NODE_ENV=test YOURPACKAGE_COVERAGE=1 mocha --require blanket --reporter mocha-lcov-reporter test/*.js | ./node_modules/coveralls/bin/coveralls.js"
+    "coverage": "mocha --require blanket -R html-cov test/*.js > test/coverage.html"
   }
 }
