@@ -36,7 +36,7 @@ var dataToStore =
     id: '3421',
     data: 'This is very important data that must be cached in our redises.',
     timestamp: Date.now()
-}
+};
 
 // Where shall we store this?
 var whichRedis = cycle.locate(dataToStore.id);
