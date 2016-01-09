@@ -29,13 +29,13 @@
     "xxhashjs": "~0.1.1"
   },
   "devDependencies": {
-    "blanket": "~1.1.7",
-    "coveralls": "~2.11.4",
-    "jscs": "~2.1.1",
-    "jshint": "~2.8.0",
-    "mocha": "~2.3.0",
+    "blanket": "~1.2.1",
+    "coveralls": "~2.11.6",
+    "jscs": "~2.8.0",
+    "jshint": "~2.9.1-rc2",
+    "mocha": "~2.3.4",
     "mocha-lcov-reporter": "0.0.2",
-    "must": "~0.12.0",
+    "must": "~0.13.1",
     "travis-cov": "^0.2"
   },
   "homepage": "https://github.com/ceejbot/light-cycle",
