@@ -6,37 +6,20 @@
   "bugs": {
     "url": "https://github.com/ceejbot/light-cycle/issues"
   },
-  "config": {
-    "blanket": {
-      "pattern": "index.js",
-      "data-cover-never": [
-        "node_modules",
-        "test"
-      ],
-      "output-reporter": "spec"
-    },
-    "travis-cov": {
-      "threshold": 90
-    }
-  },
   "contributors": [
     "C J Silverio <ceejceej@gmail.com>",
     "Kit Cambridge <kitcambridge@me.com>"
   ],
   "dependencies": {
-    "mocoverage": "~1.0.0",
     "skiplist": "~1.0.0",
     "xxhashjs": "~0.1.1"
   },
   "devDependencies": {
-    "blanket": "~1.2.1",
     "coveralls": "~2.11.6",
-    "jscs": "~2.8.0",
-    "jshint": "~2.9.1-rc2",
-    "mocha": "~2.3.4",
-    "mocha-lcov-reporter": "0.0.2",
+    "eslint": "~2.1.0",
+    "mocha": "~2.4.5",
     "must": "~0.13.1",
-    "travis-cov": "^0.2"
+    "nyc": "~5.6.0"
   },
   "homepage": "https://github.com/ceejbot/light-cycle",
   "keywords": [
@@ -50,10 +33,9 @@
   "main": "index.js",
   "repository": "git://github.com/ceejbot/light-cycle.git",
   "scripts": {
-    "lint": "jshint *.js test/*.js && jscs *.js test/*.js",
+    "lint": "eslint *.js test/*.js",
     "travis": "npm run lint && npm run test && npm run test-cov",
-    "test": "mocha --check-leaks --ui exports --require blanket -R mocoverage test/test*.js",
-    "test-cov": "mocha --require blanket -R travis-cov test/*.js",
-    "coverage": "mocha --require blanket -R html-cov test/*.js > test/coverage.html"
+    "test": "nyc mocha --check-leaks -R spec test/test*.js",
+    "test-cov": "nyc report --reporter=text-lcov | coveralls"
   }
 }

@@ -2,9 +2,8 @@
 
 var
 	demand = require('must'),
-	Lightcycle = require('../index'),
-	Xxhash     = require('xxhashjs')
-;
+	Lightcycle = require('../index')
+	;
 
 function MockResource(name)
 {
@@ -38,7 +37,7 @@ describe('light-cycle', function()
 		{
 			function mustThrow()
 			{
-				var cycle = new Lightcycle({ size: -3 });
+				return new Lightcycle({ size: -3 });
 			}
 			mustThrow.must.throw(Error);
 		});
@@ -207,6 +206,7 @@ describe('light-cycle', function()
 			cycle.resources.insert('b', r2);
 
 			var key = cycle.hashit('pomegranate');
+			key.must.be.a.string();
 			var loc = cycle.locate('pomegranate');
 			loc.must.equal(r1);
 		});

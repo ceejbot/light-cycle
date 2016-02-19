@@ -4,7 +4,7 @@ var
 	assert   = require('assert'),
 	Skiplist = require('skiplist'),
 	Xxhash   = require('xxhashjs')
-;
+	;
 
 var Lightcycle = module.exports = function Lightcycle(settings)
 {
