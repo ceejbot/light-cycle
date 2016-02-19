@@ -15,11 +15,11 @@
     "xxhashjs": "~0.1.1"
   },
   "devDependencies": {
-    "coveralls": "~2.11.6",
-    "eslint": "~2.1.0",
-    "mocha": "~2.4.5",
+    "coveralls": "2.*",
+    "eslint": "2.*",
+    "mocha": "2.*",
     "must": "~0.13.1",
-    "nyc": "~5.6.0"
+    "nyc": "5.*"
   },
   "homepage": "https://github.com/ceejbot/light-cycle",
   "keywords": [
