@@ -1,7 +1,7 @@
 {
   "name": "light-cycle",
   "description": "a consistent hash ring for your blue-glowing shards",
-  "version": "1.3.3",
+  "version": "1.3.4",
   "author": "C J Silverio <ceejceej@gmail.com>",
   "bugs": {
     "url": "https://github.com/ceejbot/light-cycle/issues"
