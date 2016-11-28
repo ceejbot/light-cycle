@@ -15,11 +15,12 @@
     "xxhashjs": "~0.2.1"
   },
   "devDependencies": {
-    "coveralls": "2.*",
-    "eslint": "~3.11.0",
+    "coveralls": "~2.11.15",
+    "eslint-config-ceejbot": "~1.0.3",
     "mocha": "3.2.0",
     "must": "~0.13.1",
-    "nyc": "10.0.0"
+    "nyc": "10.0.0",
+    "xo": "~0.17.1"
   },
   "homepage": "https://github.com/ceejbot/light-cycle",
   "keywords": [
@@ -33,9 +34,11 @@
   "main": "index.js",
   "repository": "git://github.com/ceejbot/light-cycle.git",
   "scripts": {
-    "lint": "eslint *.js test/*.js",
-    "travis": "npm run lint && npm run test && npm run test-cov",
+    "lint": "xo",
     "test": "nyc mocha --check-leaks -R spec test/test*.js",
-    "test-cov": "nyc report --reporter=text-lcov | coveralls"
+    "coverage": "nyc report --reporter=text-lcov | coveralls"
+  },
+  "xo": {
+    "extends": "eslint-config-ceejbot"
   }
 }

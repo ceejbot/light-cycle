@@ -3,7 +3,7 @@
 var
 	assert   = require('assert'),
 	Skiplist = require('skiplist'),
-	Xxhash   = require('xxhashjs')
+	Xxhash   = require('xxhashjs').h64
 	;
 
 var Lightcycle = module.exports = function Lightcycle(settings)
@@ -80,7 +80,7 @@ Lightcycle.prototype.locate = function(id)
 	if (results.length === 0)
 		results = this.resources.findWithCount(null, 1);
 
-	if (results.length)
+	if (results.length > 0)
 		return results[0][1];
 
 	return null;
@@ -91,7 +91,7 @@ Lightcycle.prototype.hashit = function(input)
 	if (!Buffer.isBuffer(input))
 		input = new Buffer(input);
 
-	var hash = new Xxhash(this.seed);
+	var hash = Xxhash(this.seed);
 	hash.update(input);
 	var result = hash.digest().toString(16);
 	while (result.length < 8) result = '0' + result;

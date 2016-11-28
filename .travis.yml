@@ -1,8 +1,7 @@
 sudo: false
 language: node_js
 node_js:
-  - "0.10"
-  - "4.*"
-  - "5.*"
-script:
-  - npm run travis
+  - "4"
+  - "6"
+  - "7"
+after_success: npm run coverage
