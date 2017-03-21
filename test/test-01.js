@@ -10,7 +10,7 @@ function MockResource(name)
 	this._name = name;
 }
 
-MockResource.prototype.name = function()
+MockResource.prototype.name = function name()
 {
 	return this._name;
 };
@@ -29,11 +29,11 @@ function makeFruitCycle()
 	return cycle;
 }
 
-describe('light-cycle', function()
+describe('light-cycle', () =>
 {
-	describe('constructor', function()
+	describe('constructor', () =>
 	{
-		it('demands a positive integer size setting', function()
+		it('demands a positive integer size setting', () =>
 		{
 			function mustThrow()
 			{
@@ -42,37 +42,37 @@ describe('light-cycle', function()
 			mustThrow.must.throw(Error);
 		});
 
-		it('provides a default hash seed', function()
+		it('provides a default hash seed', () =>
 		{
 			var cycle = new Lightcycle({ });
 			cycle.seed.must.equal(0xcafed00d);
 		});
 
-		it('respects the hash seed setting', function()
+		it('respects the hash seed setting', () =>
 		{
 			var cycle = new Lightcycle({ seed: 0xdeadbeef });
 			cycle.seed.must.equal(0xdeadbeef);
 		});
 
-		it('defaults size to 128', function()
+		it('defaults size to 128', () =>
 		{
 			var cycle = new Lightcycle({ });
 			cycle.size.must.equal(128);
 		});
 
-		it('defaults replica count to 128', function()
+		it('defaults replica count to 128', () =>
 		{
 			var cycle = new Lightcycle({ });
 			cycle.replicas.must.equal(128);
 		});
 
-		it('defaults replica count to size if size is passed in', function()
+		it('defaults replica count to size if size is passed in', () =>
 		{
 			var cycle = new Lightcycle({ size: 1024 });
 			cycle.replicas.must.equal(1024);
 		});
 
-		it('obeys both size & replica settings if provided', function()
+		it('obeys both size & replica settings if provided', () =>
 		{
 			var cycle = new Lightcycle({ size: 10, replicas: 3 });
 			cycle.size.must.equal(10);
@@ -80,9 +80,9 @@ describe('light-cycle', function()
 		});
 	});
 
-	describe('add()', function()
+	describe('add()', () =>
 	{
-		it('demands both resource and id parameters', function()
+		it('demands both resource and id parameters', () =>
 		{
 			var cycle = new Lightcycle({ size: 10, replicas: 3 });
 			var resource = { name: 'nameless' };
@@ -95,7 +95,7 @@ describe('light-cycle', function()
 			mustThrow.must.throw(Error);
 		});
 
-		it('adds a resource to the cycle', function()
+		it('adds a resource to the cycle', () =>
 		{
 			var cycle = new Lightcycle({ size: 10, replicas: 3 });
 			var resource = new MockResource('kiwi');
@@ -109,7 +109,7 @@ describe('light-cycle', function()
 			item.must.equal(resource);
 		});
 
-		it('adds `replicas` count replicas to the cycle', function()
+		it('adds `replicas` count replicas to the cycle', () =>
 		{
 			var cycle = new Lightcycle({ size: 10, replicas: 3 });
 			var resource = new MockResource('kiwi');
@@ -120,7 +120,7 @@ describe('light-cycle', function()
 			allEntries.length.must.equal(3);
 		});
 
-		it('adding twice has no ill effect', function()
+		it('adding twice has no ill effect', () =>
 		{
 			var cycle = new Lightcycle({ size: 10, replicas: 3 });
 			var resource = new MockResource('kiwi');
@@ -132,9 +132,9 @@ describe('light-cycle', function()
 		});
 	});
 
-	describe('all()', function()
+	describe('all()', () =>
 	{
-		it('returns a hash of the resources & ids', function()
+		it('returns a hash of the resources & ids', () =>
 		{
 			var cycle = makeFruitCycle();
 			var entries = cycle.all();
@@ -147,9 +147,9 @@ describe('light-cycle', function()
 		});
 	});
 
-	describe('remove()', function()
+	describe('remove()', () =>
 	{
-		it('removes all replicas from the cycle', function()
+		it('removes all replicas from the cycle', () =>
 		{
 			var cycle = new Lightcycle({ size: 10, replicas: 3 });
 			var r1 = new MockResource('kiwi');
@@ -172,7 +172,7 @@ describe('light-cycle', function()
 			demand(found).be.null();
 		});
 
-		it('silently ignores items that are not in the cycle', function()
+		it('silently ignores items that are not in the cycle', () =>
 		{
 			var cycle = new Lightcycle({ size: 10, replicas: 3 });
 			var r1 = new MockResource('kiwi');
@@ -186,16 +186,16 @@ describe('light-cycle', function()
 		});
 	});
 
-	describe('locate()', function()
+	describe('locate()', () =>
 	{
-		it('returns a single resource for a given id', function()
+		it('returns a single resource for a given id', () =>
 		{
 			var cycle = makeFruitCycle();
 			var loc = cycle.locate('pomegranate');
 			loc.must.exist();
 		});
 
-		it('handles the case of resources at the end of the circle by returning the first resource', function()
+		it('handles the case of resources at the end of the circle by returning the first resource', () =>
 		{
 			var cycle = new Lightcycle();
 
@@ -211,21 +211,21 @@ describe('light-cycle', function()
 			loc.must.equal(r1);
 		});
 
-		it('handles ids that are buffers', function()
+		it('handles ids that are buffers', () =>
 		{
 			var cycle = makeFruitCycle();
 			var loc = cycle.locate(new Buffer('mangosteen'));
 			loc.must.exist();
 		});
 
-		it('returns null when asked to locate an id when no resources are in the cycle', function()
+		it('returns null when asked to locate an id when no resources are in the cycle', () =>
 		{
 			var cycle = new Lightcycle();
 			var location = cycle.locate('kumquat');
 			demand(location).be.null();
 		});
 
-		it('gives the correct new location for items that used to live on the removed resource', function()
+		it('gives the correct new location for items that used to live on the removed resource', () =>
 		{
 			var cycle = makeFruitCycle();
 
@@ -238,9 +238,9 @@ describe('light-cycle', function()
 		});
 	});
 
-	describe('rebalance', function()
+	describe('rebalance', () =>
 	{
-		it('is triggered when adding makes the number of entries greater than the size', function()
+		it('is triggered when adding makes the number of entries greater than the size', () =>
 		{
 			var cycle = new Lightcycle({ size: 2, replicas: 2 });
 			var r1 = new MockResource('durian');

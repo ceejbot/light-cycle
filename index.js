@@ -31,7 +31,7 @@ Lightcycle.prototype.entries   = null;
 Lightcycle.SIZE_PAD     = 16;
 Lightcycle.REPLICAS_PAD = 8;
 
-Lightcycle.prototype.add = function(resource, id)
+Lightcycle.prototype.add = function add(resource, id)
 {
 	assert(resource);
 	assert(id && typeof id === 'string');
@@ -56,7 +56,7 @@ Lightcycle.prototype.add = function(resource, id)
 		this.rebalance();
 };
 
-Lightcycle.prototype.remove = function(id)
+Lightcycle.prototype.remove = function remove(id)
 {
 	assert(id && typeof id === 'string');
 	if (!Array.isArray(this.cache[id]))
@@ -72,7 +72,7 @@ Lightcycle.prototype.remove = function(id)
 	delete this.entries[id];
 };
 
-Lightcycle.prototype.locate = function(id)
+Lightcycle.prototype.locate = function locate(id)
 {
 	var key = this.hashit(id);
 	var results = this.resources.findWithCount(key, 1);
@@ -86,7 +86,7 @@ Lightcycle.prototype.locate = function(id)
 	return null;
 };
 
-Lightcycle.prototype.hashit = function(input)
+Lightcycle.prototype.hashit = function hashit(input)
 {
 	if (!Buffer.isBuffer(input))
 		input = new Buffer(input);
@@ -99,12 +99,12 @@ Lightcycle.prototype.hashit = function(input)
 	return result;
 };
 
-Lightcycle.prototype.all = function()
+Lightcycle.prototype.all = function all()
 {
 	return this.entries;
 };
 
-Lightcycle.prototype.rebalance = function()
+Lightcycle.prototype.rebalance = function rebalance()
 {
 	var ids = Object.keys(this.entries);
 
