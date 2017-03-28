@@ -19,7 +19,7 @@
     "eslint-config-ceejbot": "~1.0.3",
     "mocha": "3.2.0",
     "must": "~0.13.4",
-    "nyc": "~10.1.2",
+    "nyc": "~10.2.0",
     "xo": "~0.18.0"
   },
   "homepage": "https://github.com/ceejbot/light-cycle",
