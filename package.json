@@ -1,7 +1,7 @@
 {
   "name": "light-cycle",
   "description": "a consistent hash ring for your blue-glowing shards of PURE ENERGY",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "author": "C J Silverio <ceejceej@gmail.com>",
   "bugs": {
     "url": "https://github.com/ceejbot/light-cycle/issues"
@@ -11,16 +11,17 @@
     "Kit Cambridge <kitcambridge@me.com>"
   ],
   "dependencies": {
+    "esm": "~3.0.48",
     "skiplist": "~1.0.0",
     "xxhashjs": "~0.2.2"
   },
   "devDependencies": {
-    "coveralls": "~3.0.0",
-    "eslint-config-ceejbot": "~1.1.1",
-    "mocha": "~5.1.0",
+    "coveralls": "~3.0.1",
+    "eslint-config-ceejbot": "~1.1.2",
+    "mocha": "~5.2.0",
     "must": "~0.13.4",
-    "nyc": "~10.1.2",
-    "xo": "~0.20.3"
+    "nyc": "~12.0.2",
+    "xo": "~0.21.1"
   },
   "homepage": "https://github.com/ceejbot/light-cycle",
   "keywords": [
@@ -32,10 +33,11 @@
   ],
   "license": "MIT",
   "main": "index.js",
+  "module": "lightcycle.js",
   "repository": "git://github.com/ceejbot/light-cycle.git",
   "scripts": {
     "lint": "xo",
-    "test": "nyc mocha --check-leaks -R spec test/test*.js",
+    "test": "nyc mocha --check-leaks -R spec",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "xo": {
